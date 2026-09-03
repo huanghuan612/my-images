@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYNX｜Case study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF5;
+    --bg-card: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --border: #EAEAEA;
+    --border-light: #F0F0F0;
+    --primary: #1E3A5F;
+    --primary-light: #E8EEF5;
+    --primary-text: #1E3A5F;
+    --accent: #4A90D9;
+    --accent-light: #E8F0FA;
+    --accent-text: #2D6A9F;
+    --radius: 16px;
+    --radius-sm: 12px;
+    --radius-xs: 8px;
+
+    /* Deep tech blue palette */
+    --deep-blue: #1E3A5F;
+    --deep-blue-bg: #E8EEF5;
+    --deep-blue-text: #1E3A5F;
+    --tech-blue: #4A90D9;
+    --tech-blue-bg: #E8F0FA;
+    --tech-blue-text: #2D6A9F;
+    --cyan: #3D8B9E;
+    --cyan-bg: #ECF5F7;
+    --cyan-text: #2D6A7A;
+    --indigo: #5B6BB7;
+    --indigo-bg: #EEF0F8;
+    --indigo-text: #3D4B8C;
+    --steel: #6B7B8C;
+    --steel-bg: #EEF2F5;
+    --steel-text: #4A5A6A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,245,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .nav-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+  .nav-back svg { width: 16px; height: 16px; }
+  .nav-name { font-size: 14px; font-weight: 600; color: var(--text); }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 24px 120px;
+  }
+
+  .hero { margin-bottom: 64px; }
+  .hero-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .hero-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-bottom: 32px;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .meta-card {
+    border-radius: var(--radius-sm);
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .meta-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .meta-card.deep-blue { background: var(--deep-blue-bg); }
+  .meta-card.tech-blue { background: var(--tech-blue-bg); }
+  .meta-card.indigo { background: var(--indigo-bg); }
+
+  .meta-card .meta-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .meta-card.deep-blue .meta-icon { background: var(--deep-blue); }
+  .meta-card.tech-blue .meta-icon { background: var(--tech-blue); }
+  .meta-card.indigo .meta-icon { background: var(--indigo); }
+  .meta-card .meta-icon svg { width: 20px; height: 20px; color: #fff; }
+
+  .meta-card .meta-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .meta-card.deep-blue .meta-label { color: var(--deep-blue-text); }
+  .meta-card.tech-blue .meta-label { color: var(--tech-blue-text); }
+  .meta-card.indigo .meta-label { color: var(--indigo-text); }
+
+  .meta-card .meta-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .browser-mockup {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.02);
+    overflow: hidden;
+    margin-bottom: 80px;
+  }
+  .browser-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px;
+    background: linear-gradient(to bottom, #fafafa, #f5f5f5);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .browser-dot.r { background: #ff5f57; }
+  .browser-dot.y { background: #ffbd2e; }
+  .browser-dot.g { background: #28c840; }
+  .browser-url {
+    flex: 1;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .browser-body {
+    padding: 0;
+    background: #fff;
+    line-height: 0;
+  }
+  .browser-body img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .section { margin-bottom: 80px; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  .section h2 {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .section p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .section p strong { color: var(--text); font-weight: 600; }
+
+  .highlight-box {
+    background: var(--deep-blue-bg);
+    border-left: 3px solid var(--deep-blue);
+    padding: 20px 24px;
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    margin: 28px 0;
+  }
+  .highlight-box p {
+    margin: 0;
+    color: var(--deep-blue-text);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 32px 0;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: var(--radius-xs);
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: transform 0.2s;
+  }
+  .flow-step:hover { transform: translateY(-2px); }
+  .flow-step .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .flow-step.step-1 { background: var(--deep-blue-bg); color: var(--deep-blue-text); }
+  .flow-step.step-1 .num { background: var(--deep-blue); color: #fff; }
+  .flow-step.step-2 { background: var(--cyan-bg); color: var(--cyan-text); }
+  .flow-step.step-2 .num { background: var(--cyan); color: #fff; }
+  .flow-step.step-3 { background: var(--tech-blue-bg); color: var(--tech-blue-text); }
+  .flow-step.step-3 .num { background: var(--tech-blue); color: #fff; }
+  .flow-step.step-4 { background: var(--indigo-bg); color: var(--indigo-text); }
+  .flow-step.step-4 .num { background: var(--indigo); color: #fff; }
+  .flow-arrow {
+    color: var(--text-muted);
+    font-size: 20px;
+    padding: 0 10px;
+    font-weight: 300;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .principle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .principle-card:hover {
+    border-color: var(--deep-blue);
+    box-shadow: 0 4px 20px rgba(30,58,95,0.08);
+  }
+  .principle-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--deep-blue);
+    margin-bottom: 10px;
+  }
+  .principle-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .principle-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .role-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+  }
+  .role-content p { margin-bottom: 16px; }
+  .role-content ul { list-style: none; padding: 0; }
+  .role-content li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .role-content li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--deep-blue);
+  }
+
+  .feature-block { margin-bottom: 80px; }
+  .feature-block:last-child { margin-bottom: 0; }
+  .feature-header { margin-bottom: 32px; }
+  .feature-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .feature-header .feature-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .feature-mockup { margin-bottom: 32px; }
+  .feature-details h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .feature-details p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .feature-details ul { list-style: none; padding: 0; margin: 0; }
+  .feature-details li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .feature-details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--deep-blue);
+  }
+
+  .triple-mockup {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .triple-mockup .browser-mockup {
+    margin-bottom: 0;
+  }
+  .triple-mockup .browser-mockup .browser-body img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
+  }
+  .mockup-caption {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  .color-palette {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .color-swatch {
+    text-align: center;
+    flex: 1;
+    min-width: 80px;
+  }
+  .color-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .color-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .color-hex { font-size: 11px; color: var(--text-muted); }
+
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .outcome-card {
+    border-radius: var(--radius-sm);
+    padding: 28px 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .outcome-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .outcome-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .outcome-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .outcome-card.deep-blue { background: var(--deep-blue-bg); }
+  .outcome-card.deep-blue h4 { color: var(--deep-blue-text); }
+  .outcome-card.deep-blue p { color: var(--deep-blue-text); opacity: 0.8; }
+  .outcome-card.cyan { background: var(--cyan-bg); }
+  .outcome-card.cyan h4 { color: var(--cyan-text); }
+  .outcome-card.cyan p { color: var(--cyan-text); opacity: 0.8; }
+  .outcome-card.tech-blue { background: var(--tech-blue-bg); }
+  .outcome-card.tech-blue h4 { color: var(--tech-blue-text); }
+  .outcome-card.tech-blue p { color: var(--tech-blue-text); opacity: 0.8; }
+  .outcome-card.indigo { background: var(--indigo-bg); }
+  .outcome-card.indigo h4 { color: var(--indigo-text); }
+  .outcome-card.indigo p { color: var(--indigo-text); opacity: 0.8; }
+
+  .quote-section {
+    margin-top: 100px;
+    padding: 60px 0;
+    border-top: 1px solid var(--border);
+  }
+  .quote-section blockquote {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .quote-section cite {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-style: normal;
+    line-height: 1.8;
+  }
+  .quote-section cite strong { color: var(--text); font-weight: 600; }
+
+  @media (max-width: 640px) {
+    .meta-grid { grid-template-columns: 1fr; }
+    .principles-grid { grid-template-columns: 1fr; }
+    .outcome-grid { grid-template-columns: 1fr; }
+    .role-grid { grid-template-columns: 1fr; gap: 16px; }
+    .flow-diagram { flex-direction: column; gap: 8px; }
+    .flow-arrow { transform: rotate(90deg); }
+    .triple-mockup { grid-template-columns: 1fr; }
+    .triple-mockup .browser-mockup .browser-body img { height: auto; }
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back" target="_self">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回作品
+    </a>
+    <span class="nav-name">SYNX</span>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-label">Case Study</div>
+    <h1>SYNX</h1>
+    <p class="hero-desc">
+      把复杂数据库能力讲清楚<br>
+      面向海外企业客户的数据库官网，帮助用户快速理解产品、验证能力并建立信任。
+    </p>
+    <div class="meta-grid">
+      <div class="meta-card deep-blue">
+        <div class="meta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="meta-label">Product</div>
+        <div class="meta-value">SYNX Database</div>
+      </div>
+      <div class="meta-card tech-blue">
+        <div class="meta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+        </div>
+        <div class="meta-label">Platform</div>
+        <div class="meta-value">Web</div>
+      </div>
+      <div class="meta-card indigo">
+        <div class="meta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="meta-label">My Role</div>
+        <div class="meta-value">UX / Web Design</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN VISUAL ===== -->
+  <div class="browser-mockup">
+    <div class="browser-header">
+      <div class="browser-dot r"></div>
+      <div class="browser-dot y"></div>
+      <div class="browser-dot g"></div>
+      <div class="browser-url">synxdata.com</div>
+    </div>
+    <div class="browser-body">
+      <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/SYNX完整页.webp" alt="SYNX 首页完整展示">
+    </div>
+  </div>
+
+  <!-- ===== THE CHALLENGE ===== -->
+  <section class="section">
+    <div class="section-title">The Challenge</div>
+    <h2>技术很多，但客户不一定看得懂</h2>
+    <p>
+      数据库产品涉及性能、迁移、兼容性、架构等多个复杂维度。每个技术点都有价值，但如果同时抛给用户，只会造成信息过载。
+    </p>
+    <p>
+      真正的问题不是<strong>"讲什么"</strong>，而是<strong>"先讲什么"</strong>。用户才愿意继续看下去。
+    </p>
+    <div class="highlight-box">
+      <p>核心设计问题：如何组织信息优先级，让用户从"理解价值"自然过渡到"验证技术"？</p>
+    </div>
+  </section>
+
+  <!-- ===== DESIGN PRINCIPLE ===== -->
+  <section class="section">
+    <div class="section-title">Design Principle</div>
+    <h2>先讲价值，再讲技术</h2>
+    <p>
+      我把核心体验组织成一条渐进式路径。用户不需要一开始就理解所有技术细节，而是先判断"这个产品是否值得我了解"。
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-step step-1">
+        <span class="num">01</span>
+        Understand
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step step-2">
+        <span class="num">02</span>
+        Verify
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step step-3">
+        <span class="num">03</span>
+        Trust
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step step-4">
+        <span class="num">04</span>
+        Contact
+      </div>
+    </div>
+
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-num">01</div>
+        <h4>Value first, details later</h4>
+        <p>首页先回答"为什么选 SYNX"，而不是堆砌技术参数。</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">02</div>
+        <h4>One page, one purpose</h4>
+        <p>每个页面只解决一个问题，不试图在单页内完成所有说服。</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">03</div>
+        <h4>Professional but approachable</h4>
+        <p>专业感建立信任，但克制的设计让复杂技术不显得 intimidating。</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">04</div>
+        <h4>Trust through transparency</h4>
+        <p>技术文档、团队背景、开源贡献，让信任有具体支撑。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MY ROLE ===== -->
+  <section class="section">
+    <div class="role-grid">
+      <div class="role-label">我的角色</div>
+      <div class="role-content">
+        <p><strong>UX / Web Design</strong></p>
+        <ul>
+          <li>信息架构规划，定义 Understand → Verify → Trust → Contact 路径</li>
+          <li>首页设计，梳理"Why SYNX"的价值层级</li>
+          <li>多页面体系设计：Home / Docs / About / Blog</li>
+          <li>视觉系统设计，建立深蓝科技感的品牌调性</li>
+          <li>响应式设计与前端交付</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE 1: HOME ===== -->
+  <section class="feature-block">
+    <div class="feature-header">
+      <h3>先回答"为什么是 SYNX"</h3>
+      <p class="feature-desc">首页先讲产品价值和企业能力，再逐步进入技术细节。先让用户判断值不值得继续了解。</p>
+    </div>
+    <div class="browser-mockup feature-mockup">
+      <div class="browser-header">
+        <div class="browser-dot r"></div>
+        <div class="browser-dot y"></div>
+        <div class="browser-dot g"></div>
+        <div class="browser-url">synxdata.com</div>
+      </div>
+      <div class="browser-body">
+        <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/SYNX-1.webp" alt="SYNX 首页多视角展示">
+      </div>
+    </div>
+    <div class="feature-details">
+      <h4>设计决策</h4>
+      <p>首页采用"价值金字塔"结构：Hero 区域用一句话定位产品（Seamless Greenplum Migration），紧接着"Why SynxDB?"用 4 张卡片概括核心优势，再往下才是技术架构细节。用户可以在任意层级停止阅读，已经获得了足够的信息。</p>
+      <h4>关键特性</h4>
+      <ul>
+        <li>Hero 区一句话价值主张 + CTA</li>
+        <li>"Why SynxDB?" 四宫格价值卡片</li>
+        <li>Enterprise Ready 功能矩阵</li>
+        <li>技术架构可视化展示</li>
+        <li>Contact 表单降低沟通门槛</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE 2: INFORMATION STRUCTURE ===== -->
+  <section class="feature-block">
+    <div class="feature-header">
+      <h3>不同页面，解决不同问题</h3>
+      <p class="feature-desc">Home 理解产品 · Docs 验证技术 · About 建立信任 · Blog 持续输出专业内容。</p>
+    </div>
+    <div class="triple-mockup">
+      <div class="browser-mockup">
+        <div class="browser-header">
+          <div class="browser-dot r"></div>
+          <div class="browser-dot y"></div>
+          <div class="browser-dot g"></div>
+          <div class="browser-url">synxdata.com/docs</div>
+        </div>
+        <div class="browser-body">
+          <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/SYNX-2.webp" alt="SYNX Docs 页面">
+        </div>
+        <div class="mockup-caption">Docs — 技术验证</div>
+      </div>
+      <div class="browser-mockup">
+        <div class="browser-header">
+          <div class="browser-dot r"></div>
+          <div class="browser-dot y"></div>
+          <div class="browser-dot g"></div>
+          <div class="browser-url">synxdata.com/about</div>
+        </div>
+        <div class="browser-body">
+          <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/SYNX-3.webp" alt="SYNX About 页面">
+        </div>
+        <div class="mockup-caption">About — 建立信任</div>
+      </div>
+      <div class="browser-mockup">
+        <div class="browser-header">
+          <div class="browser-dot r"></div>
+          <div class="browser-dot y"></div>
+          <div class="browser-dot g"></div>
+          <div class="browser-url">synxdata.com/blog</div>
+        </div>
+        <div class="browser-body">
+          <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/SYNX-4.webp" alt="SYNX Blog 页面">
+        </div>
+        <div class="mockup-caption">Blog — 持续输出</div>
+      </div>
+    </div>
+    <div class="feature-details">
+      <h4>设计决策</h4>
+      <p>每个页面有明确的单一目标。Docs 采用技术文档的标准三栏布局（导航+内容+目录），降低技术用户的学习成本。About 用团队照片和背景故事建立人情味信任。Blog 用卡片式布局展示专业内容，同时保持视觉节奏。</p>
+      <h4>关键特性</h4>
+      <ul>
+        <li>Docs：三栏文档结构，左侧导航、中间内容、右侧目录锚点</li>
+        <li>About：团队照片+背景故事，让技术公司有人情味</li>
+        <li>Blog：卡片式文章列表，封面图+摘要+作者信息</li>
+        <li>全局导航统一，深色主题保持品牌一致性</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE 3: VISUAL SYSTEM ===== -->
+  <section class="feature-block">
+    <div class="feature-header">
+      <h3>专业、稳定、可信</h3>
+      <p class="feature-desc">深蓝主色、统一栅格、克制的科技感，让复杂技术内容更有秩序。</p>
+    </div>
+    <div class="feature-details">
+      <h4>设计决策</h4>
+      <p>面向海外企业客户，视觉系统需要在"专业可信"和"现代 approachable"之间找到平衡。过重的科技感会让人觉得复杂难懂，过轻又缺乏 enterprise 应有的稳重感。</p>
+      <h4>色彩系统</h4>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="color-circle" style="background:#0F172A;"></div>
+          <div class="color-name">Background</div>
+          <div class="color-hex">#0F172A</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-circle" style="background:#1E3A5F;"></div>
+          <div class="color-name">Primary</div>
+          <div class="color-hex">#1E3A5F</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-circle" style="background:#4A90D9;"></div>
+          <div class="color-name">Accent</div>
+          <div class="color-hex">#4A90D9</div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-circle" style="background:#E2E8F0;"></div>
+          <div class="color-name">Text</div>
+          <div class="color-hex">#E2E8F0</div>
+        </div>
+      </div>
+      <h4>关键特性</h4>
+      <ul>
+        <li>深色主题贯穿全站，降低长时间阅读疲劳</li>
+        <li>蓝色渐变光效营造科技感但不浮夸</li>
+        <li>统一 8px 栅格系统，保持页面节奏一致</li>
+        <li>卡片式信息组织，模块化展示复杂内容</li>
+        <li>克制的动效，只在关键交互处使用</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== OUTCOME ===== -->
+  <section class="section">
+    <div class="section-title">Outcome / Reflection</div>
+    <h2>更容易理解，也更容易信任</h2>
+    <p>
+      SYNX 把复杂技术内容重新组织成一条更清晰的企业决策路径。
+    </p>
+    <div class="outcome-grid">
+      <div class="outcome-card deep-blue">
+        <h4>价值优先的信息架构</h4>
+        <p>用户先理解"为什么"，再深入了解"怎么做"。</p>
+      </div>
+      <div class="outcome-card cyan">
+        <h4>多页面各司其职</h4>
+        <p>Home / Docs / About / Blog 形成完整的说服链条。</p>
+      </div>
+      <div class="outcome-card tech-blue">
+        <h4>视觉建立专业信任</h4>
+        <p>深蓝科技调性让复杂产品显得可靠而非 intimidating。</p>
+      </div>
+      <div class="outcome-card indigo">
+        <h4>决策路径更短</h4>
+        <p>从了解产品到联系销售，每一步都有明确的信息支撑。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <section class="quote-section">
+    <blockquote>
+      "技术产品的官网，不是技术说明书，而是信任的起点。"
+    </blockquote>
+    <cite>
+      SYNX 的设计不是展示所有功能，而是帮助用户做出"值得继续了解"的判断。<br>
+      当信息有层次、有节奏地呈现时，复杂本身就不再是障碍。
+    </cite>
+  </section>
+
+</main>
+
+</body>
+</html>

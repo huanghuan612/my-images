@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Longfor Design System · 移动端设计规范 — 黄欢 UX 作品集</title>
+<link rel="preconnect" href="https://fonts.loli.net"/>
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin/>
+<link href="https://fonts.loli.net/css2?family=Archivo:wght@500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --paper:#FDFCF9;
+  --ink:#17130E;
+  --ink-70:rgba(23,19,14,.70);
+  --ink-55:rgba(23,19,14,.55);
+  --line:rgba(23,19,14,.47);
+  --line-soft:rgba(23,19,14,.18);
+  --verm:#F04B1F;
+  --verm-deep:#D93E15;
+  --maxw:1100px;
+  --navh:76px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --radius:12px;
+}
+::selection{background:var(--verm);color:var(--paper);}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Inter","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.75;font-size:16px;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* Nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-back{display:inline-flex;align-items:center;gap:6px;color:var(--ink-55);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-back:hover{color:var(--ink)}
+.nav-back svg{width:16px;height:16px;flex-shrink:0}
+.nav-name{font-size:14px;font-weight:600;color:var(--ink)}
+
+/* Hero Carousel — thumbs 左对齐 */
+.hero-wrap{max-width:var(--maxw);margin:0 auto;padding:100px 32px 0}
+.hero-carousel{position:relative}
+.hero-display{border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;background:#fff}
+.hero-display img{width:100%;display:block;transition:opacity .3s;cursor:zoom-in}
+.hero-thumbs{display:flex;gap:10px;justify-content:flex-start}
+.hero-thumb{width:80px;aspect-ratio:16/10;border:2px solid transparent;border-radius:8px;overflow:hidden;cursor:pointer;opacity:.5;transition:all .25s var(--ease)}
+.hero-thumb.active{opacity:1;border-color:var(--verm)}
+.hero-thumb:hover{opacity:.8}
+.hero-thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* Project Info */
+.project-info{max-width:var(--maxw);margin:0 auto;padding:100px 32px 32px}
+.project-label{font-family:"Archivo",sans-serif;font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--verm);margin-bottom:14px;display:block}
+.project-title{font-family:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;font-size:40px;font-weight:700;line-height:1.15;letter-spacing:-0.02em;margin-bottom:20px;color:#1A1A1A}
+.project-title em{font-style:normal;color:var(--verm)}
+.project-title i.dot{font-style:normal;color:var(--verm);margin-left:2px}
+.project-meta{display:flex;gap:32px;margin-bottom:28px;font-family:"Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:15px;color:var(--ink-55);flex-wrap:wrap;line-height:1.7}
+.project-meta span{font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.project-meta b{color:#737373;font-weight:400;font-size:14px;font-family:"Noto Sans SC",sans-serif;letter-spacing:0;text-transform:none;margin-left:4px}
+
+/* Stats — 复刻 falcon 样式 */
+.stats{max-width:var(--maxw);margin:0 auto;padding:0 32px 48px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{border:1px solid #F5F5F5;padding:0 18px;text-align:left;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease);border-radius:var(--radius);background:#fff;display:flex;align-items:center;justify-content:space-between;height:100px}
+.stat-card:hover{border-color:var(--line);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.stat-num{font-family:"Noto Sans","Noto Sans SC",sans-serif;font-size:32px;font-weight:700;color:#3c3c3c;line-height:1}
+.stat-title{font-size:12px;font-weight:400;color:#353535;line-height:1.3;white-space:nowrap}
+.stat-sub{font-size:12px;color:#C2C2C2;line-height:1.4;margin-top:2px;font-family:"Noto Sans","Noto Sans SC",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+
+/* Description */
+.desc{max-width:var(--maxw);margin:0 auto;padding:0 32px 40px}
+.desc-text{font-size:16px;font-weight:400;line-height:1.8;color:#666666;margin-bottom:24px}
+.desc-text strong{font-weight:600;color:#1A1A1A}
+
+/* Category */
+.category{max-width:var(--maxw);margin:0 auto;padding:0 32px 56px}
+.cat-header{display:flex;align-items:baseline;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.cat-title{font-family:"Noto Serif SC",serif;font-size:22px;font-weight:900}
+.cat-desc{font-size:16px;font-weight:400;line-height:1.8;color:#666666;margin-bottom:20px;max-width:680px}
+
+/* Carousel — thumbs 左对齐 */
+.carousel-wrap{position:relative}
+.carousel-display{border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;background:#fff}
+.carousel-display img{width:100%;display:block;transition:opacity .3s;cursor:zoom-in}
+.carousel-thumbs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;justify-content:flex-start}
+.carousel-thumb{flex:0 0 auto;width:90px;aspect-ratio:16/10;border:2px solid transparent;border-radius:8px;overflow:hidden;cursor:pointer;opacity:.5;transition:all .25s var(--ease)}
+.carousel-thumb.active{opacity:1;border-color:var(--verm)}
+.carousel-thumb:hover{opacity:.8}
+.carousel-thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* Bottom */
+.bottom{max-width:var(--maxw);margin:0 auto;padding:40px 32px;border-top:1px solid var(--line-soft)}
+.bottom-quote{font-family:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;font-size:clamp(22px, 4vw, 32px);font-weight:700;line-height:1.4;letter-spacing:-0.01em;color:#1A1A1A;margin-bottom:20px;max-width:100%;white-space:nowrap}
+.bottom-quote em{font-style:normal;color:var(--verm)}
+.bottom-quote i.dot{font-style:normal;color:var(--verm);margin-left:2px}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center}
+.bn-link{font-family:"Archivo",sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-55);display:inline-flex;align-items:center;gap:10px;transition:color .3s}
+.bn-link:hover{color:var(--verm)}
+
+/* Lightbox */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(23,19,14,.94);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+.lb.active{opacity:1;pointer-events:auto}
+.lb-img{max-width:90vw;max-height:85vh;box-shadow:0 24px 80px rgba(0,0,0,.5);transform:scale(.96);transition:transform .35s var(--ease)}
+.lb.active .lb-img{transform:scale(1)}
+.lb-close{position:fixed;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--paper);color:var(--ink);border:none;font-size:22px;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s;z-index:201}
+.lb-close:hover{background:var(--verm);color:var(--paper);transform:rotate(90deg)}
+.lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:var(--paper);color:var(--ink);border:none;font-size:20px;cursor:pointer;display:grid;place-items:center;transition:background .2s;z-index:201;font-family:"Archivo",sans-serif;font-weight:800}
+.lb-nav:hover{background:var(--verm);color:var(--paper)}
+.lb-prev{left:20px}
+.lb-next{right:20px}
+.lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);font-size:12px;color:rgba(253,252,249,.6);letter-spacing:.1em;font-family:"Archivo",sans-serif;z-index:201}
+
+/* Animations */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.visible{opacity:1;transform:translateY(0)}
+
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back" target="_self">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回作品
+    </a>
+    <span class="nav-name">龙湖 B 端设计规范</span>
+  </div>
+</nav>
+
+<!-- Hero Carousel — thumbs 左对齐 -->
+<div class="hero-wrap rv">
+  <div class="hero-carousel" id="heroCarousel">
+    <div class="hero-display">
+      <img src="https://github.com/huanghuan612/my-images/blob/main/longfo-cover.webp?raw=true" alt="Longfor Design System" id="heroDisplayImg" style="cursor:zoom-in"/>
+    </div>
+    <div class="hero-thumbs">
+      <div class="hero-thumb active" data-hero-index="0"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-cover.webp?raw=true" alt="Cover"/></div>
+      <div class="hero-thumb" data-hero-index="1"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-intro.webp?raw=true" alt="Intro"/></div>
+    </div>
+  </div>
+</div>
+
+<!-- Project Info -->
+<section class="project-info rv">
+  <span class="project-label">Project 06 / Longfor Design System · 移动端设计规范</span>
+  <h1 class="project-title">
+    统筹集团 B 端产品设计方向<i class="dot">，</i><br/>
+    输出<em>团队级设计规范</em>并落地<i class="dot">。</i>
+  </h1>
+  <div class="project-meta">
+    <span>Role <b>资深 UX 设计师 · 集团平台设计</b></span>
+    <span>Period <b>2017 — 至今</b></span>
+    <span>Co <b>龙湖集团</b></span>
+  </div>
+</section>
+
+<!-- Stats — 复刻 falcon 样式，3列，去掉专利 -->
+<section class="stats rv">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="stat-title">规范体系维度</div>
+        <div class="stat-sub">Color / Icon / Font / Grid</div>
+      </div>
+      <div class="stat-right">
+        <span class="stat-num">5<sup style="font-size:16px">维</sup></span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="stat-title">覆盖场景</div>
+        <div class="stat-sub">高频组件复用</div>
+      </div>
+      <div class="stat-right">
+        <span class="stat-num">40<sup style="font-size:16px">+</sup></span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="stat-title">组件复用率</div>
+        <div class="stat-sub">设计一致性</div>
+      </div>
+      <div class="stat-right">
+        <span class="stat-num">90<sup style="font-size:16px">%</sup></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Description -->
+<section class="desc rv">
+  <p class="desc-text">
+    Longfor Design System 是龙湖集团移动端 B 端产品的设计规范体系。我统筹集团 B 端产品设计方向，从 <strong>Color、Icon、Font、Grid、Components</strong> 五个维度建立完整的设计规范，确保跨团队、跨项目的设计一致性，让「设计」变成可复用、可沉淀的团队资产。
+  </p>
+</section>
+
+<!-- Color -->
+<section class="category rv">
+  <div class="cat-header">
+    <span class="cat-title">Color · 色彩规范</span>
+  </div>
+  <p class="cat-desc">定义品牌主色、功能色、中性色的使用规则，建立色彩层级与对比度标准，确保在不同场景下的可读性与品牌一致性。</p>
+  <div class="carousel-wrap" id="colorCarousel">
+    <div class="carousel-display">
+      <img src="https://github.com/huanghuan612/my-images/blob/main/longfo-color1.webp?raw=true" alt="Color" id="colorDisplayImg" style="cursor:zoom-in"/>
+    </div>
+    <div class="carousel-thumbs">
+      <div class="carousel-thumb active" data-cat="color" data-index="0"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-color1.webp?raw=true" alt="Color 1"/></div>
+      <div class="carousel-thumb" data-cat="color" data-index="1"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-color2.webp?raw=true" alt="Color 2"/></div>
+      <div class="carousel-thumb" data-cat="color" data-index="2"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-color3.webp?raw=true" alt="Color 3"/></div>
+      <div class="carousel-thumb" data-cat="color" data-index="3"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-color4.webp?raw=true" alt="Color 4"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- Icon -->
+<section class="category rv">
+  <div class="cat-header">
+    <span class="cat-title">Icon · 图标规范</span>
+  </div>
+  <p class="cat-desc">统一图标绘制标准（尺寸、线宽、圆角、视觉重心），建立图标库分类体系，覆盖导航、操作、状态等全场景。</p>
+  <div class="carousel-wrap" id="iconCarousel">
+    <div class="carousel-display">
+      <img src="https://github.com/huanghuan612/my-images/blob/main/longfo-icon1.webp?raw=true" alt="Icon" id="iconDisplayImg" style="cursor:zoom-in"/>
+    </div>
+    <div class="carousel-thumbs">
+      <div class="carousel-thumb active" data-cat="icon" data-index="0"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-icon1.webp?raw=true" alt="Icon 1"/></div>
+      <div class="carousel-thumb" data-cat="icon" data-index="1"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-icon2.webp?raw=true" alt="Icon 2"/></div>
+      <div class="carousel-thumb" data-cat="icon" data-index="2"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-icon7.webp?raw=true" alt="Icon 3"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- Font -->
+<section class="category rv">
+  <div class="cat-header">
+    <span class="cat-title">Font · 字体规范</span>
+  </div>
+  <p class="cat-desc">规范字体家族、字重、字号阶梯、行高与字距，建立信息层级系统，让界面文字在任何屏幕上都清晰易读。</p>
+  <div class="carousel-wrap" id="fontCarousel">
+    <div class="carousel-display">
+      <img src="https://github.com/huanghuan612/my-images/blob/main/longfo-font1.webp?raw=true" alt="Font" id="fontDisplayImg" style="cursor:zoom-in"/>
+    </div>
+    <div class="carousel-thumbs">
+      <div class="carousel-thumb active" data-cat="font" data-index="0"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-font1.webp?raw=true" alt="Font 1"/></div>
+      <div class="carousel-thumb" data-cat="font" data-index="1"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-font2.webp?raw=true" alt="Font 2"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- Grid -->
+<section class="category rv">
+  <div class="cat-header">
+    <span class="cat-title">Grid · 栅格规范</span>
+  </div>
+  <p class="cat-desc">建立响应式栅格系统，定义边距、间距、模块比例的数学关系，让布局从「凭感觉」变成「有依据」。</p>
+  <div class="carousel-wrap" id="gridCarousel">
+    <div class="carousel-display">
+      <img src="https://github.com/huanghuan612/my-images/blob/main/longfo-grid1.webp?raw=true" alt="Grid" id="gridDisplayImg" style="cursor:zoom-in"/>
+    </div>
+    <div class="carousel-thumbs">
+      <div class="carousel-thumb active" data-cat="grid" data-index="0"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-grid1.webp?raw=true" alt="Grid 1"/></div>
+      <div class="carousel-thumb" data-cat="grid" data-index="1"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-grid2.webp?raw=true" alt="Grid 2"/></div>
+      <div class="carousel-thumb" data-cat="grid" data-index="2"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-grid3.webp?raw=true" alt="Grid 3"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- Components -->
+<section class="category rv">
+  <div class="cat-header">
+    <span class="cat-title">Components · 组件规范</span>
+  </div>
+  <p class="cat-desc">沉淀 40+ 高频场景组件，覆盖按钮、表单、列表、弹窗、导航等核心交互模式，每个组件包含用法说明、状态定义与代码标注。</p>
+  <div class="carousel-wrap" id="componentsCarousel">
+    <div class="carousel-display">
+      <img src="https://github.com/huanghuan612/my-images/blob/main/longfo-components.webp?raw=true" alt="Components" id="componentsDisplayImg" style="cursor:zoom-in"/>
+    </div>
+    <div class="carousel-thumbs">
+      <div class="carousel-thumb active" data-cat="components" data-index="0"><img src="https://github.com/huanghuan612/my-images/blob/main/longfo-components.webp?raw=true" alt="Components"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom -->
+<section class="bottom">
+  <div class="bottom-quote rv">
+    让「设计」变成可复用<i class="dot">、</i>可沉淀的<em>团队资产</em><i class="dot">。</i>
+  </div>
+  <nav class="bottom-nav rv">
+    <a class="bn-link" href="work-longo-ops.html"><span class="arr">←</span> 上一个：龙小湖</a>
+    <a class="bn-link" href="work-hashml.html">下一个：HashDataML <span class="arr">→</span></a>
+  </nav>
+</section>
+
+<!-- Lightbox -->
+<div class="lb" id="lb">
+  <button class="lb-close" id="lbClose">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev">←</button>
+  <button class="lb-nav lb-next" id="lbNext">→</button>
+  <img class="lb-img" id="lbImg" src="" alt=""/>
+  <span class="lb-counter" id="lbCounter">1 / 12</span>
+</div>
+
+<script>
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:.08,rootMargin:"-4% 0px"});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ===== Hero Carousel ===== */
+const heroImages=[
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-cover.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-intro.webp?raw=true'
+];
+const heroDisplay=document.getElementById('heroDisplayImg');
+const heroThumbs=document.querySelectorAll('.hero-thumb');
+
+heroThumbs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    heroThumbs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const idx=parseInt(t.dataset.heroIndex);
+    heroDisplay.style.opacity='0';
+    setTimeout(()=>{heroDisplay.src=heroImages[idx];heroDisplay.style.opacity='1';},200);
+  });
+});
+
+/* ===== Color Carousel ===== */
+const colorImages=[
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-color1.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-color2.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-color3.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-color4.webp?raw=true'
+];
+const colorDisplay=document.getElementById('colorDisplayImg');
+const colorThumbs=document.querySelectorAll('.carousel-thumb[data-cat="color"]');
+
+colorThumbs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    colorThumbs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const idx=parseInt(t.dataset.index);
+    colorDisplay.style.opacity='0';
+    setTimeout(()=>{colorDisplay.src=colorImages[idx];colorDisplay.style.opacity='1';},200);
+  });
+});
+
+/* ===== Icon Carousel ===== */
+const iconImages=[
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-icon1.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-icon2.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-icon7.webp?raw=true'
+];
+const iconDisplay=document.getElementById('iconDisplayImg');
+const iconThumbs=document.querySelectorAll('.carousel-thumb[data-cat="icon"]');
+
+iconThumbs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    iconThumbs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const idx=parseInt(t.dataset.index);
+    iconDisplay.style.opacity='0';
+    setTimeout(()=>{iconDisplay.src=iconImages[idx];iconDisplay.style.opacity='1';},200);
+  });
+});
+
+/* ===== Font Carousel ===== */
+const fontImages=[
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-font1.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-font2.webp?raw=true'
+];
+const fontDisplay=document.getElementById('fontDisplayImg');
+const fontThumbs=document.querySelectorAll('.carousel-thumb[data-cat="font"]');
+
+fontThumbs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    fontThumbs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const idx=parseInt(t.dataset.index);
+    fontDisplay.style.opacity='0';
+    setTimeout(()=>{fontDisplay.src=fontImages[idx];fontDisplay.style.opacity='1';},200);
+  });
+});
+
+/* ===== Grid Carousel ===== */
+const gridImages=[
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-grid1.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-grid2.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/longfo-grid3.webp?raw=true'
+];
+const gridDisplay=document.getElementById('gridDisplayImg');
+const gridThumbs=document.querySelectorAll('.carousel-thumb[data-cat="grid"]');
+
+gridThumbs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    gridThumbs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const idx=parseInt(t.dataset.index);
+    gridDisplay.style.opacity='0';
+    setTimeout(()=>{gridDisplay.src=gridImages[idx];gridDisplay.style.opacity='1';},200);
+  });
+});
+
+/* ===== Components Carousel ===== */
+const compImages=['https://github.com/huanghuan612/my-images/blob/main/longfo-components.webp?raw=true'];
+const compDisplay=document.getElementById('componentsDisplayImg');
+
+/* ===== All images for lightbox ===== */
+const allImages=[
+  ...heroImages,
+  ...colorImages,
+  ...iconImages,
+  ...fontImages,
+  ...gridImages,
+  ...compImages
+];
+
+/* ===== Lightbox ===== */
+const lb=document.getElementById('lb');
+const lbImg=document.getElementById('lbImg');
+const lbClose=document.getElementById('lbClose');
+const lbPrev=document.getElementById('lbPrev');
+const lbNext=document.getElementById('lbNext');
+const lbCounter=document.getElementById('lbCounter');
+let currentIdx=0;
+
+function openLb(idx){
+  currentIdx=idx;
+  lbImg.src=allImages[currentIdx];
+  lbCounter.textContent=(currentIdx+1)+' / '+allImages.length;
+  lb.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+
+function closeLb(){
+  lb.classList.remove('active');
+  document.body.style.overflow='';
+  setTimeout(()=>{lbImg.src='';},350);
+}
+
+function prevImg(){
+  currentIdx=(currentIdx-1+allImages.length)%allImages.length;
+  lbImg.style.opacity='0';
+  setTimeout(()=>{lbImg.src=allImages[currentIdx];lbCounter.textContent=(currentIdx+1)+' / '+allImages.length;lbImg.style.opacity='1';},150);
+}
+
+function nextImg(){
+  currentIdx=(currentIdx+1)%allImages.length;
+  lbImg.style.opacity='0';
+  setTimeout(()=>{lbImg.src=allImages[currentIdx];lbCounter.textContent=(currentIdx+1)+' / '+allImages.length;lbImg.style.opacity='1';},150);
+}
+
+/* Click to open lightbox */
+heroDisplay.addEventListener('click',()=>{
+  const active=document.querySelector('.hero-thumb.active');
+  openLb(active?parseInt(active.dataset.heroIndex):0);
+});
+
+colorDisplay.addEventListener('click',()=>{
+  const active=document.querySelector('.carousel-thumb[data-cat="color"].active');
+  openLb(2+(active?parseInt(active.dataset.index):0));
+});
+
+iconDisplay.addEventListener('click',()=>{
+  const active=document.querySelector('.carousel-thumb[data-cat="icon"].active');
+  openLb(6+(active?parseInt(active.dataset.index):0));
+});
+
+fontDisplay.addEventListener('click',()=>{
+  const active=document.querySelector('.carousel-thumb[data-cat="font"].active');
+  openLb(9+(active?parseInt(active.dataset.index):0));
+});
+
+gridDisplay.addEventListener('click',()=>{
+  const active=document.querySelector('.carousel-thumb[data-cat="grid"].active');
+  openLb(11+(active?parseInt(active.dataset.index):0));
+});
+
+compDisplay.addEventListener('click',()=>{
+  openLb(14);
+});
+
+lbClose.addEventListener('click',closeLb);
+lbPrev.addEventListener('click',(e)=>{e.stopPropagation();prevImg();});
+lbNext.addEventListener('click',(e)=>{e.stopPropagation();nextImg();});
+lb.addEventListener('click',(e)=>{if(e.target===lb)closeLb();});
+document.addEventListener('keydown',(e)=>{
+  if(!lb.classList.contains('active'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')prevImg();
+  if(e.key==='ArrowRight')nextImg();
+});
+</script>
+</body>
+</html>

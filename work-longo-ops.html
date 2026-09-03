@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>龙小湖 · Web / APP — 黄欢 UX 作品集</title>
+<link rel="preconnect" href="https://fonts.loli.net"/>
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin/>
+<link href="https://fonts.loli.net/css2?family=Archivo:wght@500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --paper:#FDFCF9;
+  --ink:#17130E;
+  --ink-70:rgba(23,19,14,.70);
+  --ink-55:rgba(23,19,14,.55);
+  --line:rgba(23,19,14,.47);
+  --line-soft:rgba(23,19,14,.18);
+  --verm:#F04B1F;
+  --verm-deep:#D93E15;
+  --maxw:1100px;
+  --navh:76px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --radius:12px;
+}
+::selection{background:var(--verm);color:var(--paper);}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Inter","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.75;font-size:16px;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* Nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-back{display:inline-flex;align-items:center;gap:6px;color:var(--ink-55);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-back:hover{color:var(--ink)}
+.nav-back svg{width:16px;height:16px;flex-shrink:0}
+.nav-name{font-size:14px;font-weight:600;color:var(--ink)}
+.cta:hover 
+/* Hero */
+.hero-wrap{max-width:var(--maxw);margin:0 auto;padding:calc(var(--navh) + 40px) 32px 0}
+.hero-img{border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden}
+.hero-img img{width:100%;display:block}
+
+/* Project Info */
+.project-info{max-width:var(--maxw);margin:0 auto;padding:200px 32px 32px}
+.project-label{font-family:"Archivo",sans-serif;font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--verm);margin-bottom:14px;display:block}
+.project-title{font-family:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;font-size:40px;font-weight:700;line-height:1.15;letter-spacing:-0.02em;margin-bottom:20px;color:#1A1A1A}
+.project-title em{font-style:normal;color:var(--verm)}
+.project-title i.dot{font-style:normal;color:var(--verm);margin-left:2px}
+.project-meta{display:flex;gap:32px;margin-bottom:28px;font-size:13px;color:var(--ink-55);flex-wrap:wrap}
+.project-meta span{font-family:"Archivo",sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.project-meta b{color:#737373;font-weight:400;font-size:14px;font-family:"Noto Sans SC",sans-serif;letter-spacing:0;text-transform:none;margin-left:4px}
+
+/* Stats Bar */
+.stats{max-width:var(--maxw);margin:0 auto;padding:0 32px 48px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{border:1px solid #F5F5F5;padding:0 18px;text-align:left;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease);border-radius:var(--radius);background:#fff;display:flex;align-items:center;justify-content:space-between;height:100px}
+.stat-card:hover{border-color:var(--line)}
+.stat-num{font-family:"Noto Sans","Noto Sans SC",sans-serif;font-size:32px;font-weight:700;color:#3c3c3c;line-height:1}
+.stat-title{font-size:12px;font-weight:400;color:#353535;line-height:1.3;white-space:nowrap}
+.stat-sub{font-size:12px;color:#C2C2C2;line-height:1.4;margin-top:2px;font-family:"Noto Sans","Noto Sans SC",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+
+/* Description */
+.desc{max-width:var(--maxw);margin:0 auto;padding:0 32px 40px}
+.desc-text{font-size:16px;font-weight:400;line-height:1.8;color:#666666;margin-bottom:24px}
+.desc-text strong{font-weight:600;color:#1A1A1A}
+
+/* Timeline */
+.timeline-wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px 56px}
+.timeline-item{display:flex;gap:24px;margin-bottom:48px}
+@media(max-width:640px){.timeline-item{gap:16px;margin-bottom:36px}}
+.timeline-node{flex:0 0 60px;display:flex;flex-direction:column;align-items:center;position:relative}
+.timeline-num{font-family:"Archivo",sans-serif;font-size:14px;font-weight:800;color:var(--verm);width:36px;height:36px;border-radius:50%;border:2px solid var(--verm);display:grid;place-items:center;background:var(--paper);z-index:2}
+.timeline-line{width:0.5px;flex:1;background:var(--line-soft);margin-top:8px}
+.timeline-content{flex:1;min-width:0}
+.timeline-title{font-family:"Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:15px;font-weight:700;margin-bottom:16px;color:var(--ink);line-height:1.7}
+
+/* Gallery Grid */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:900px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+.gallery-item{border:1px solid var(--line-soft);border-radius:8px;overflow:hidden;cursor:zoom-in;position:relative;aspect-ratio:16/10;background:#f5f5f5}
+.gallery-item::after{content:"";position:absolute;inset:0;background:rgba(23,19,14,0);transition:background .3s var(--ease);pointer-events:none}
+.gallery-item:hover::after{background:rgba(23,19,14,.04)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .4s var(--ease)}
+.gallery-item:hover img{transform:scale(1.03)}
+
+/* Placeholder */
+.ph-box{border:2px dashed var(--line-soft);border-radius:8px;padding:40px 20px;text-align:center;color:var(--ink-55);font-size:13px}
+.ph-box b{display:block;color:var(--ink-70);font-size:12px;margin-top:6px}
+
+/* Bottom */
+.bottom{max-width:var(--maxw);margin:0 auto;padding:40px 32px;border-top:1px solid var(--line-soft)}
+.bottom-quote{font-family:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;font-size:clamp(22px, 4vw, 32px);font-weight:700;line-height:1.4;letter-spacing:-0.01em;color:#1A1A1A;margin-bottom:20px;max-width:600px}
+.bottom-quote em{font-style:normal;color:var(--verm)}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center}
+.bn-link{font-family:"Archivo",sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-55);display:inline-flex;align-items:center;gap:10px;transition:color .3s}
+.bn-link:hover{color:var(--verm)}
+.bn-link 
+.p-foot{text-align:center;padding:32px 32px 80px;font-family:"Source Han Sans SC","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:22px;color:#1A1A1A;letter-spacing:.06em;line-height:1.7}
+.p-foot a{color:var(--ink-55);border-bottom:1px solid var(--line-soft);transition:color .3s,border-color .3s}
+.p-foot a:hover{color:var(--verm);border-color:var(--verm)}
+
+/* Lightbox */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(23,19,14,.94);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+.lb.active{opacity:1;pointer-events:auto}
+.lb-img{max-width:90vw;max-height:85vh;box-shadow:0 24px 80px rgba(0,0,0,.5);transform:scale(.96);transition:transform .35s var(--ease)}
+.lb.active .lb-img{transform:scale(1)}
+.lb-close{position:fixed;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--paper);color:var(--ink);border:none;font-size:22px;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s;z-index:201}
+.lb-close:hover{background:var(--verm);color:var(--paper);transform:rotate(90deg)}
+.lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:var(--paper);color:var(--ink);border:none;font-size:20px;cursor:pointer;display:grid;place-items:center;transition:background .2s;z-index:201;font-family:"Archivo",sans-serif;font-weight:800}
+.lb-nav:hover{background:var(--verm);color:var(--paper)}
+.lb-prev{left:20px}
+.lb-next{right:20px}
+.lb-counter{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);font-size:12px;color:rgba(253,252,249,.6);letter-spacing:.1em;font-family:"Archivo",sans-serif;z-index:201}
+
+/* Animations */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.visible{opacity:1;transform:translateY(0)}
+
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back" target="_self">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回作品
+    </a>
+    <span class="nav-name">龙小湖</span>
+  </div>
+</nav>
+
+<!-- 项目信息 -->
+<section class="project-info rv">
+  <span class="project-label">Project 05 / 龙小湖 · Web / APP</span>
+  <h1 class="project-title">
+    主导 UX 策略<i class="dot">，</i><br/>
+    跑通<em>需求 → 原型 → 落地 → 数据验证</em>全流程<i class="dot">。</i>
+  </h1>
+  <div class="project-meta">
+    <span>Role <b>资深 UX 设计师 · 集团平台设计</b></span>
+    <span>Period <b>2017 — 至今</b></span>
+    <span>Co <b>龙湖集团</b></span>
+  </div>
+</section>
+
+<!-- 业绩数据 -->
+<section class="stats rv">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="stat-title">用户任务完成率</div>
+        <div class="stat-sub">Task Success</div>
+      </div>
+      <div class="stat-right">
+        <span class="stat-num">+40<sup>%</sup></span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="stat-title">培养新人成骨干</div>
+        <div class="stat-sub">Team Growth</div>
+      </div>
+      <div class="stat-right">
+        <span class="stat-num">4<sup>人</sup></span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="stat-title">单项目周期</div>
+        <div class="stat-sub">AI 工具赋能</div>
+      </div>
+      <div class="stat-right">
+        <span class="stat-num">−30<sup>%</sup></span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-left">
+        <div class="stat-title">金 / 银奖荣誉</div>
+        <div class="stat-sub">Awards</div>
+      </div>
+      <div class="stat-right">
+        <span class="stat-num">2<sup>项</sup></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 项目描述 -->
+<section class="desc rv">
+  <p class="desc-text">
+    龙小湖是龙湖集团运营平台（Web / APP）的核心产品。我主导 UX 策略，跑通<strong>需求 → 原型 → 落地 → 数据验证</strong>的全流程闭环。重点不是输出多少张设计稿，而是让每一次设计决策都有数据支撑、每一次上线都能验证假设。
+  </p>
+</section>
+
+<!-- Timeline -->
+<div class="timeline-wrap">
+
+  <!-- 01 改版历程 -->
+  <div class="timeline-item rv">
+    <div class="timeline-node">
+      <span class="timeline-num">01</span>
+      <div class="timeline-line"></div>
+    </div>
+    <div class="timeline-content">
+      <div class="timeline-title">改版历程</div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-index="0"><img src="https://github.com/huanghuan612/my-images/blob/main/1.webp?raw=true" alt="改版历程 新增" loading="lazy"/></div>
+        <div class="gallery-item" data-index="1"><img src="https://github.com/huanghuan612/my-images/blob/main/2.webp?raw=true" alt="改版历程" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 前期研究 -->
+  <div class="timeline-item rv">
+    <div class="timeline-node">
+      <span class="timeline-num">02</span>
+      <div class="timeline-line"></div>
+    </div>
+    <div class="timeline-content">
+      <div class="timeline-title">前期研究</div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-index="2"><img src="https://github.com/huanghuan612/my-images/blob/main/3.webp?raw=true" alt="前期研究 1" loading="lazy"/></div>
+        <div class="gallery-item" data-index="3"><img src="https://github.com/huanghuan612/my-images/blob/main/4.webp?raw=true" alt="前期研究 2" loading="lazy"/></div>
+        <div class="gallery-item" data-index="4"><img src="https://github.com/huanghuan612/my-images/blob/main/5.webp?raw=true" alt="前期研究 3" loading="lazy"/></div>
+        <div class="gallery-item" data-index="5"><img src="https://github.com/huanghuan612/my-images/blob/main/6.webp?raw=true" alt="前期研究 4" loading="lazy"/></div>
+        <div class="gallery-item" data-index="6"><img src="https://github.com/huanghuan612/my-images/blob/main/7.webp?raw=true" alt="前期研究 5" loading="lazy"/></div>
+        <div class="gallery-item" data-index="7"><img src="https://github.com/huanghuan612/my-images/blob/main/8.webp?raw=true" alt="前期研究 6" loading="lazy"/></div>
+        <div class="gallery-item" data-index="8"><img src="https://github.com/huanghuan612/my-images/blob/main/9.webp?raw=true" alt="前期研究 7" loading="lazy"/></div>
+        <div class="gallery-item" data-index="9"><img src="https://github.com/huanghuan612/my-images/blob/main/10.webp?raw=true" alt="前期研究 8" loading="lazy"/></div>
+        <div class="gallery-item" data-index="10"><img src="https://github.com/huanghuan612/my-images/blob/main/11.webp?raw=true" alt="前期研究 9" loading="lazy"/></div>
+        <div class="gallery-item" data-index="11"><img src="https://github.com/huanghuan612/my-images/blob/main/12.webp?raw=true" alt="前期研究 10" loading="lazy"/></div>
+        <div class="gallery-item" data-index="12"><img src="https://github.com/huanghuan612/my-images/blob/main/13.webp?raw=true" alt="前期研究 11" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 交付验证 -->
+  <div class="timeline-item rv">
+    <div class="timeline-node">
+      <span class="timeline-num">03</span>
+      <div class="timeline-line"></div>
+    </div>
+    <div class="timeline-content">
+      <div class="timeline-title">交付验证</div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-index="13"><img src="https://github.com/huanghuan612/my-images/blob/main/14.webp?raw=true" alt="交付验证 1" loading="lazy"/></div>
+        <div class="gallery-item" data-index="14"><img src="https://github.com/huanghuan612/my-images/blob/main/15.webp?raw=true" alt="交付验证 2" loading="lazy"/></div>
+        <div class="gallery-item" data-index="15"><img src="https://github.com/huanghuan612/my-images/blob/main/16.webp?raw=true" alt="交付验证 3" loading="lazy"/></div>
+        <div class="gallery-item" data-index="16"><img src="https://github.com/huanghuan612/my-images/blob/main/17.webp?raw=true" alt="交付验证 4" loading="lazy"/></div>
+        <div class="gallery-item" data-index="17"><img src="https://github.com/huanghuan612/my-images/blob/main/18.webp?raw=true" alt="交付验证 5" loading="lazy"/></div>
+        <div class="gallery-item" data-index="18"><img src="https://github.com/huanghuan612/my-images/blob/main/19.webp?raw=true" alt="交付验证 6" loading="lazy"/></div>
+        <div class="gallery-item" data-index="19"><img src="https://github.com/huanghuan612/my-images/blob/main/20.webp?raw=true" alt="交付验证 7" loading="lazy"/></div>
+        <div class="gallery-item" data-index="20"><img src="https://github.com/huanghuan612/my-images/blob/main/21.webp?raw=true" alt="交付验证 8" loading="lazy"/></div>
+        <div class="gallery-item" data-index="21"><img src="https://github.com/huanghuan612/my-images/blob/main/22.webp?raw=true" alt="交付验证 9" loading="lazy"/></div>
+        <div class="gallery-item" data-index="22"><img src="https://github.com/huanghuan612/my-images/blob/main/23.webp?raw=true" alt="交付验证 10" loading="lazy"/></div>
+        <div class="gallery-item" data-index="23"><img src="https://github.com/huanghuan612/my-images/blob/main/24.webp?raw=true" alt="交付验证 11" loading="lazy"/></div>
+        <div class="gallery-item" data-index="24"><img src="https://github.com/huanghuan612/my-images/blob/main/25.webp?raw=true" alt="交付验证 12" loading="lazy"/></div>
+        <div class="gallery-item" data-index="25"><img src="https://github.com/huanghuan612/my-images/blob/main/26.webp?raw=true" alt="交付验证 13" loading="lazy"/></div>
+        <div class="gallery-item" data-index="26"><img src="https://github.com/huanghuan612/my-images/blob/main/27.webp?raw=true" alt="交付验证 14" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 沉淀数据 -->
+  <div class="timeline-item rv">
+    <div class="timeline-node">
+      <span class="timeline-num">04</span>
+    </div>
+    <div class="timeline-content">
+      <div class="timeline-title">沉淀数据</div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-index="27"><img src="https://github.com/huanghuan612/my-images/blob/main/28.webp?raw=true" alt="沉淀数据 1" loading="lazy"/></div>
+        <div class="gallery-item" data-index="28"><img src="https://github.com/huanghuan612/my-images/blob/main/29.webp?raw=true" alt="沉淀数据 2" loading="lazy"/></div>
+        <div class="gallery-item" data-index="29"><img src="https://github.com/huanghuan612/my-images/blob/main/30.webp?raw=true" alt="沉淀数据 3" loading="lazy"/></div>
+        <div class="gallery-item" data-index="30"><img src="https://github.com/huanghuan612/my-images/blob/main/31.webp?raw=true" alt="沉淀数据 4" loading="lazy"/></div>
+        <div class="gallery-item" data-index="31"><img src="https://github.com/huanghuan612/my-images/blob/main/32.webp?raw=true" alt="沉淀数据 5" loading="lazy"/></div>
+        <div class="gallery-item" data-index="32"><img src="https://github.com/huanghuan612/my-images/blob/main/33.webp?raw=true" alt="沉淀数据 6" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 底部 -->
+<section class="bottom">
+  <div class="bottom-quote rv">
+    每一次设计决策都有数据支撑<i class="dot">，</i>每一次上线都能验证假设<i class="dot">。</i>
+  </div>
+  <nav class="bottom-nav rv">
+    <a class="bn-link" href="work-falcon.html"><span class="arr">←</span> 上一个：猎鹰</a>
+    <a class="bn-link" href="work-ai-guide.html">下一个：龙湖 B 端设计规划 <span class="arr">→</span></a>
+  </nav>
+</section>
+
+<footer class="p-foot">
+  <p>© 2026 黄欢 HUANG HUAN · UX Designer · <a href="index.html">返回首页</a></p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lb" id="lb">
+  <button class="lb-close" id="lbClose">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev">←</button>
+  <button class="lb-nav lb-next" id="lbNext">→</button>
+  <img class="lb-img" id="lbImg" src="" alt=""/>
+  <span class="lb-counter" id="lbCounter">1 / 33</span>
+</div>
+
+<script>
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:.08,rootMargin:"-4% 0px"});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+const images=[
+  'https://github.com/huanghuan612/my-images/blob/main/1.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/2.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/3.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/4.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/5.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/6.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/7.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/8.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/9.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/10.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/11.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/12.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/13.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/14.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/15.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/16.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/17.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/18.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/19.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/20.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/21.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/22.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/23.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/24.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/25.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/26.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/27.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/28.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/29.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/30.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/31.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/32.webp?raw=true',
+  'https://github.com/huanghuan612/my-images/blob/main/33.webp?raw=true'
+];
+
+const lb=document.getElementById('lb');
+const lbImg=document.getElementById('lbImg');
+const lbClose=document.getElementById('lbClose');
+const lbPrev=document.getElementById('lbPrev');
+const lbNext=document.getElementById('lbNext');
+const lbCounter=document.getElementById('lbCounter');
+let currentIdx=0;
+
+function openLb(idx){
+  currentIdx=idx;
+  lbImg.src=images[currentIdx];
+  lbCounter.textContent=(currentIdx+1)+' / '+images.length;
+  lb.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+
+function closeLb(){
+  lb.classList.remove('active');
+  document.body.style.overflow='';
+  setTimeout(()=>{lbImg.src='';},350);
+}
+
+function prevImg(){
+  currentIdx=(currentIdx-1+images.length)%images.length;
+  lbImg.style.opacity='0';
+  setTimeout(()=>{
+    lbImg.src=images[currentIdx];
+    lbCounter.textContent=(currentIdx+1)+' / '+images.length;
+    lbImg.style.opacity='1';
+  },150);
+}
+
+function nextImg(){
+  currentIdx=(currentIdx+1)%images.length;
+  lbImg.style.opacity='0';
+  setTimeout(()=>{
+    lbImg.src=images[currentIdx];
+    lbCounter.textContent=(currentIdx+1)+' / '+images.length;
+    lbImg.style.opacity='1';
+  },150);
+}
+
+document.querySelectorAll('.gallery-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const idx=parseInt(item.dataset.index);
+    openLb(idx);
+  });
+});
+
+document.querySelector('.hero-img').addEventListener('click',()=>{
+  openLb(0);
+});
+
+lbClose.addEventListener('click',closeLb);
+lbPrev.addEventListener('click',(e)=>{e.stopPropagation();prevImg();});
+lbNext.addEventListener('click',(e)=>{e.stopPropagation();nextImg();});
+lb.addEventListener('click',(e)=>{if(e.target===lb)closeLb();});
+document.addEventListener('keydown',(e)=>{
+  if(!lb.classList.contains('active'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')prevImg();
+  if(e.key==='ArrowRight')nextImg();
+});
+</script>
+</body>
+</html>

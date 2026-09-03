@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloudberry｜Case study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF5;
+    --bg-card: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --border: #EAEAEA;
+    --border-light: #F0F0F0;
+    --primary: #5B6BB7;
+    --primary-light: #EEF0F8;
+    --accent: #D4A574;
+    --accent-light: #FDF6EE;
+    --radius: 16px;
+    --radius-sm: 12px;
+    --radius-xs: 8px;
+
+    /* Color palette inspired by Clairo */
+    --salmon: #F4A68C;
+    --salmon-bg: #FDF2EC;
+    --salmon-text: #B87252;
+    --teal: #3D7C7C;
+    --teal-bg: #ECF5F5;
+    --teal-text: #2D6A6A;
+    --cream: #FAFAF5;
+    --gold: #D4B85A;
+    --gold-bg: #FDF8EC;
+    --gold-text: #9A8230;
+    --lavender: #9B8EC7;
+    --lavender-bg: #F0EDF8;
+    --lavender-text: #6B5B9E;
+    --rose: #D4847A;
+    --rose-bg: #FDF0EE;
+    --rose-text: #A85D54;
+    --sage: #7AA88A;
+    --sage-bg: #EEF5F0;
+    --sage-text: #4A7A5A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,245,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .nav-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+  .nav-back svg { width: 16px; height: 16px; }
+  .nav-name { font-size: 14px; font-weight: 600; color: var(--text); }
+
+  /* Layout */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 24px 120px;
+  }
+
+  /* Hero */
+  .hero { margin-bottom: 64px; }
+  .hero-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .hero-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-bottom: 32px;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+
+  /* Meta Cards - Colored */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .meta-card {
+    border-radius: var(--radius-sm);
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .meta-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .meta-card.salmon { background: var(--salmon-bg); }
+  .meta-card.teal { background: var(--teal-bg); }
+  .meta-card.lavender { background: var(--lavender-bg); }
+
+  .meta-card .meta-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .meta-card.salmon .meta-icon { background: var(--salmon); }
+  .meta-card.teal .meta-icon { background: var(--teal); }
+  .meta-card.lavender .meta-icon { background: var(--lavender); }
+
+  .meta-card .meta-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+  }
+
+  .meta-card .meta-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .meta-card.salmon .meta-label { color: var(--salmon-text); }
+  .meta-card.teal .meta-label { color: var(--teal-text); }
+  .meta-card.lavender .meta-label { color: var(--lavender-text); }
+
+  .meta-card .meta-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* Browser Mockup */
+  .browser-mockup {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.02);
+    overflow: hidden;
+    margin-bottom: 80px;
+  }
+  .browser-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px;
+    background: linear-gradient(to bottom, #fafafa, #f5f5f5);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .browser-dot.r { background: #ff5f57; }
+  .browser-dot.y { background: #ffbd2e; }
+  .browser-dot.g { background: #28c840; }
+  .browser-url {
+    flex: 1;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .browser-body {
+    padding: 0;
+    background: #fff;
+    line-height: 0;
+  }
+  .browser-body img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Section */
+  .section { margin-bottom: 80px; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  .section h2 {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .section p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .section p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .highlight-box {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    margin: 28px 0;
+  }
+  .highlight-box p {
+    margin: 0;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* Flow diagram - Colored Cards */
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 32px 0;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: var(--radius-xs);
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: transform 0.2s;
+  }
+  .flow-step:hover { transform: translateY(-2px); }
+  .flow-step .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .flow-step.step-1 { background: var(--salmon-bg); color: var(--salmon-text); }
+  .flow-step.step-1 .num { background: var(--salmon); color: #fff; }
+  .flow-step.step-2 { background: var(--gold-bg); color: var(--gold-text); }
+  .flow-step.step-2 .num { background: var(--gold); color: #fff; }
+  .flow-step.step-3 { background: var(--teal-bg); color: var(--teal-text); }
+  .flow-step.step-3 .num { background: var(--teal); color: #fff; }
+  .flow-step.step-4 { background: var(--lavender-bg); color: var(--lavender-text); }
+  .flow-step.step-4 .num { background: var(--lavender); color: #fff; }
+
+  .flow-arrow {
+    color: var(--text-muted);
+    font-size: 20px;
+    padding: 0 10px;
+    font-weight: 300;
+  }
+
+  /* Principle cards */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .principle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .principle-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 20px rgba(91,107,183,0.08);
+  }
+  .principle-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .principle-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .principle-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Role section */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .role-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+  }
+  .role-content p {
+    margin-bottom: 16px;
+  }
+  .role-content ul {
+    list-style: none;
+    padding: 0;
+  }
+  .role-content li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .role-content li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* Feature section */
+  .feature-block {
+    margin-bottom: 80px;
+  }
+  .feature-block:last-child { margin-bottom: 0; }
+
+  .feature-header {
+    margin-bottom: 32px;
+  }
+  .feature-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .feature-header .feature-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .feature-mockup {
+    margin-bottom: 32px;
+  }
+
+  .feature-details h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .feature-details p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .feature-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .feature-details li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .feature-details li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Dual mockup for execution flow */
+  .dual-mockup {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .dual-mockup .browser-mockup {
+    margin-bottom: 0;
+  }
+  .mockup-caption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* Outcome Cards - Colored */
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .outcome-card {
+    border-radius: var(--radius-sm);
+    padding: 28px 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .outcome-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .outcome-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .outcome-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .outcome-card.salmon { background: var(--salmon-bg); }
+  .outcome-card.salmon h4 { color: var(--salmon-text); }
+  .outcome-card.salmon p { color: var(--salmon-text); opacity: 0.8; }
+
+  .outcome-card.teal { background: var(--teal-bg); }
+  .outcome-card.teal h4 { color: var(--teal-text); }
+  .outcome-card.teal p { color: var(--teal-text); opacity: 0.8; }
+
+  .outcome-card.gold { background: var(--gold-bg); }
+  .outcome-card.gold h4 { color: var(--gold-text); }
+  .outcome-card.gold p { color: var(--gold-text); opacity: 0.8; }
+
+  .outcome-card.lavender { background: var(--lavender-bg); }
+  .outcome-card.lavender h4 { color: var(--lavender-text); }
+  .outcome-card.lavender p { color: var(--lavender-text); opacity: 0.8; }
+
+  /* Quote */
+  .quote-section {
+    margin-top: 100px;
+    padding: 60px 0;
+    border-top: 1px solid var(--border);
+  }
+  .quote-section blockquote {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .quote-section cite {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-style: normal;
+    line-height: 1.8;
+  }
+  .quote-section cite strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .meta-grid { grid-template-columns: 1fr; }
+    .principles-grid { grid-template-columns: 1fr; }
+    .outcome-grid { grid-template-columns: 1fr; }
+    .role-grid { grid-template-columns: 1fr; gap: 16px; }
+    .flow-diagram { flex-direction: column; gap: 8px; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back" target="_self">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回作品
+    </a>
+    <span class="nav-name">Cloudberry</span>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-label">Case Study</div>
+    <h1>Cloudberry</h1>
+    <p class="hero-desc">
+      复杂数据库任务的清晰工作台<br>
+      Cloudberry 是一款面向数据分析师和数据库用户的 Web 工作台，支持 SQL 编写、执行与结果查看。我的工作重点不是增加更多功能，而是<strong>梳理专业用户高频使用的工作路径，让复杂操作更连续、更容易掌控</strong>。
+    </p>
+    <div class="meta-grid">
+      <div class="meta-card salmon">
+        <div class="meta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="meta-label">Product</div>
+        <div class="meta-value">Cloudberry Database</div>
+      </div>
+      <div class="meta-card teal">
+        <div class="meta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+        </div>
+        <div class="meta-label">Platform</div>
+        <div class="meta-value">Web</div>
+      </div>
+      <div class="meta-card lavender">
+        <div class="meta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="meta-label">My Role</div>
+        <div class="meta-value">UX / Product Design</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN VISUAL ===== -->
+  <div class="browser-mockup">
+    <div class="browser-header">
+      <div class="browser-dot r"></div>
+      <div class="browser-dot y"></div>
+      <div class="browser-dot g"></div>
+      <div class="browser-url">cloudberry.app/worksheet</div>
+    </div>
+    <div class="browser-body">
+      <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/Cloudberry4.webp" alt="Cloudberry 主界面 - SQL 编辑器与结果表格">
+    </div>
+  </div>
+
+  <!-- ===== THE CHALLENGE ===== -->
+  <section class="section">
+    <div class="section-title">The Challenge</div>
+    <h2>专业工具不是功能少，而是信息太多</h2>
+    <p>
+      数据库用户需要同时处理工作表、数据库资源、SQL 代码、执行状态和查询结果。界面上的每一个面板都有存在的理由，但当它们同时出现时，用户的认知负荷会迅速超载。
+    </p>
+    <p>
+      真正的问题不是某个按钮不好用，而是<strong>任务容易中断</strong>。用户需要不断确认：我现在在哪？SQL 运行到哪里了？结果出来了吗？我要不要切到别的页面？
+    </p>
+    <div class="highlight-box">
+      <p>核心设计问题：如何让用户在复杂数据库任务中，始终保持上下文连续？</p>
+    </div>
+  </section>
+
+  <!-- ===== DESIGN PRINCIPLE ===== -->
+  <section class="section">
+    <div class="section-title">Design Principle</div>
+    <h2>一个工作空间，一条连续任务</h2>
+    <p>
+      我把整个体验围绕一条核心任务重新组织。尽量减少页面跳转，让用户在同一个工作空间里完成主要任务。
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-step step-1">
+        <span class="num">01</span>
+        Worksheet
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step step-2">
+        <span class="num">02</span>
+        Write
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step step-3">
+        <span class="num">03</span>
+        Execute
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step step-4">
+        <span class="num">04</span>
+        Results
+      </div>
+    </div>
+
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-num">01</div>
+        <h4>Context over navigation</h4>
+        <p>尽量让任务发生在同一个工作空间，而不是增加页面跳转。</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">02</div>
+        <h4>Feedback over speed</h4>
+        <p>数据库任务未必能更快，但可以让等待更明确。</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">03</div>
+        <h4>Assistance over memory</h4>
+        <p>让系统在输入过程中提供帮助，而不是依赖用户记住所有知识。</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-num">04</div>
+        <h4>Flow over features</h4>
+        <p>功能不是孤立存在，而是围绕完整任务链组织。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MY ROLE ===== -->
+  <section class="section">
+    <div class="role-grid">
+      <div class="role-label">我的角色</div>
+      <div class="role-content">
+        <p><strong>UX / Product Design</strong></p>
+        <ul>
+          <li>用户访谈与场景梳理，识别高频工作路径</li>
+          <li>信息架构重组，定义 Worksheet 为核心的任务模型</li>
+          <li>交互流程设计，减少页面跳转与上下文丢失</li>
+          <li>视觉设计与组件系统，保持专业工具的清晰感</li>
+          <li>可用性测试与迭代验证</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE 1 ===== -->
+  <section class="feature-block">
+    <div class="feature-header">
+      <h3>更清晰的任务组织</h3>
+      <p class="feature-desc">Worksheet 与 Database 保持稳定可见，用户始终知道自己身在何处。</p>
+    </div>
+    <div class="browser-mockup feature-mockup">
+      <div class="browser-header">
+        <div class="browser-dot r"></div>
+        <div class="browser-dot y"></div>
+        <div class="browser-dot g"></div>
+        <div class="browser-url">cloudberry.app/worksheets</div>
+      </div>
+      <div class="browser-body">
+        <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/Cloudberry1.webp" alt="Worksheet 列表页 - 任务组织">
+      </div>
+    </div>
+    <div class="feature-details">
+      <h4>设计决策</h4>
+      <p>将数据库资源树与 Worksheet 编辑器并置在同一视图，用户无需在"找表"和"写 SQL"之间来回切换。左侧导航保持固定，右侧编辑区随 Worksheet 切换而更新。</p>
+      <h4>关键特性</h4>
+      <ul>
+        <li>侧边栏数据库资源树，支持折叠与搜索</li>
+        <li>Worksheet 标签页管理，多任务并行不丢失上下文</li>
+        <li>表结构悬停预览，减少跳转查看表定义的次数</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE 2 ===== -->
+  <section class="feature-block">
+    <div class="feature-header">
+      <h3>更连续的 SQL 编辑</h3>
+      <p class="feature-desc">自动补全与文档信息减少操作中断，让编写过程保持心流。</p>
+    </div>
+    <div class="browser-mockup feature-mockup">
+      <div class="browser-header">
+        <div class="browser-dot r"></div>
+        <div class="browser-dot y"></div>
+        <div class="browser-dot g"></div>
+        <div class="browser-url">cloudberry.app/worksheet</div>
+      </div>
+      <div class="browser-body">
+        <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/Cloudberry2.webp" alt="SQL 编辑器 - 自动补全">
+      </div>
+    </div>
+    <div class="feature-details">
+      <h4>设计决策</h4>
+      <p>SQL 编辑器不是简单的文本框，而是理解上下文的智能界面。自动补全不仅提示关键字，更根据当前数据库的表结构提供精准建议，让用户无需记忆所有字段名。右侧 Docs 链接随时可查，不打断编码节奏。</p>
+      <h4>关键特性</h4>
+      <ul>
+        <li>上下文感知的 SQL 自动补全</li>
+        <li>表/字段文档悬停提示</li>
+        <li>语法高亮与实时错误检查</li>
+        <li>查询历史与快速复用</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== FEATURE 3: Execution & Results ===== -->
+  <section class="feature-block">
+    <div class="feature-header">
+      <h3>从执行到结果的完整闭环</h3>
+      <p class="feature-desc">执行过程始终可感知、可控制；结果与编辑器同屏呈现，验证无需跳转。</p>
+    </div>
+
+    <div class="dual-mockup">
+      <div class="browser-mockup">
+        <div class="browser-header">
+          <div class="browser-dot r"></div>
+          <div class="browser-dot y"></div>
+          <div class="browser-dot g"></div>
+          <div class="browser-url">cloudberry.app/worksheet — executing</div>
+        </div>
+        <div class="browser-body">
+          <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/Cloudberry3.webp" alt="查询执行中状态">
+        </div>
+        <div class="mockup-caption">执行中 — 实时进度与取消控制</div>
+      </div>
+
+      <div class="browser-mockup">
+        <div class="browser-header">
+          <div class="browser-dot r"></div>
+          <div class="browser-dot y"></div>
+          <div class="browser-dot g"></div>
+          <div class="browser-url">cloudberry.app/worksheet — results</div>
+        </div>
+        <div class="browser-body">
+          <img src="https://raw.githubusercontent.com/huanghuan612/my-images/main/Cloudberry4.webp" alt="查询结果展示">
+        </div>
+        <div class="mockup-caption">执行完成 — 结果表格与编辑器同屏</div>
+      </div>
+    </div>
+
+    <div class="feature-details">
+      <h4>设计决策</h4>
+      <p>执行状态不是简单的"加载中"，而是展示真实的执行进度。用户可以看到查询进行到哪一步、已运行多久、扫描了多少数据，同时提供 Cancel 按钮让用户始终保有控制权。执行完成后，结果区域自动展开，与编辑器上下排列，目光只需向下移动即可验证结果，无需离开当前页面。</p>
+      <h4>关键特性</h4>
+      <ul>
+        <li>实时执行进度与阶段提示（9/111 查询进度、已运行时间）</li>
+        <li>执行详情展示：Start Time、ID、Warehouse、Produced Rows</li>
+        <li>一键取消执行，安全回退</li>
+        <li>编辑器与结果区同屏展示，无需跳转</li>
+        <li>结果表格支持 Find/Replace 快速定位数据</li>
+        <li>表头固定、行号对齐、数据类型一目了然</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== SUMMARY ===== -->
+  <section class="section">
+    <div class="section-title">Outcome</div>
+    <h2>让复杂工作更容易掌控</h2>
+    <p>
+      Cloudberry 最终形成了一套围绕核心工作流展开的数据库工作台：
+    </p>
+    <div class="outcome-grid">
+      <div class="outcome-card salmon">
+        <h4>更清晰的任务组织</h4>
+        <p>Worksheet 与 Database 保持稳定可见。</p>
+      </div>
+      <div class="outcome-card gold">
+        <h4>更连续的 SQL 编辑</h4>
+        <p>自动补全与文档信息减少操作中断。</p>
+      </div>
+      <div class="outcome-card teal">
+        <h4>更明确的执行反馈</h4>
+        <p>长时间查询过程始终可感知、可控制。</p>
+      </div>
+      <div class="outcome-card lavender">
+        <h4>更短的验证闭环</h4>
+        <p>从代码编辑到结果查看保持在同一上下文中。</p>
+      </div>
+    </div>
+    <p style="margin-top: 32px;">
+      <strong>不是把数据库工作变简单，而是让复杂工作更容易掌控。</strong>
+    </p>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <section class="quote-section">
+    <blockquote>
+      "专业用户不怕复杂，他们怕失去上下文。"
+    </blockquote>
+    <cite>
+      在高复杂度工具里，好的体验不是减少所有信息，而是让信息在正确的时间、正确的位置出现。
+    </cite>
+  </section>
+
+</main>
+
+</body>
+</html>
