@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://huanghuan612.github.io/my-images/sitemap.xml
